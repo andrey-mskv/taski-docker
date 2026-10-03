@@ -32,6 +32,12 @@ services:
   frontend:
     env_file: .env
     build: ./frontend/
+    # Команда, которая будет выполняться внутри этого контейнера
+    # Переопределяет команду CMD из Dockerfile
+    command: cp -r /app/build/. /frontend_static/
+    # Тут подключаем volume со статикой к frontend
+    volumes:
+      - static:/frontend_static
 
   gateway:
     # Собрать и запустить образ, 
